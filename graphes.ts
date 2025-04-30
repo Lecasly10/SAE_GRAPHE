@@ -1,58 +1,6 @@
 import { readFileSync, createWriteStream } from "node:fs";
-
-class Sommet {
-    private nom : string;
-    private voisins : Sommet[];
-
-    constructor(n : string, v :Sommet[]){
-        this.nom = n;
-        this.voisins = v || [];
-    }
-
-    public getNom(){
-        return this.nom;
-    }
-    public getVoisins(){
-        return this.voisins;
-    }
-    public setVoisin(v : Sommet[]){
-        this.voisins = v;
-    }
-    public addVoisin(v : Sommet){
-        this.voisins.push(v);
-    }
-    public removeVoisin(v : Sommet){
-        let index = this.voisins.indexOf(v);
-        if(index > -1){
-            this.voisins.splice(index, 1);
-        }
-    }
-}
-
-class Arrete {
-    private s1 : Sommet;
-    private s2 : Sommet;
-    private poids : number;
-
-    constructor(s1, s2, poids){
-        this.s1 = s1;
-        this.s2 = s2;
-        this.poids = poids;
-    }
-
-    public getS2(){
-        return this.s2;
-    }
-    public getS1(){
-        return this.s1;
-    }
-    public getPoids(){
-        return this.poids;
-    }
-    public setPoids(poids : number){
-        this.poids = poids;
-    }
-}
+import { Sommet } from "./sommet";
+import { Arrete } from "./arete";
 
 class graph {
     private nom : string;
@@ -191,50 +139,7 @@ class graph {
 }
 
 /*
-let g = new graph();
-let s1 = new Sommet("A", []);
-let s2 = new Sommet("B", []);
-let s3 = new Sommet("C", []);
-let s4 = new Sommet("D", []);
-let s5 = new Sommet("E", []);
-let s6 = new Sommet("F", []);
-let s7 = new Sommet("G", []);
-g.addSommet(s1);
-g.addSommet(s2);
-g.addSommet(s3);
-g.addSommet(s4);
-g.addSommet(s5);
-g.addSommet(s6);
-g.addSommet(s7);
-let a1 = new Arrete(s1, s2, 1);
-let a2 = new Arrete(s1, s3, 2);
-let a3 = new Arrete(s2, s4, 3);
-let a4 = new Arrete(s3, s5, 4);
-let a5 = new Arrete(s4, s6, 5);
-let a6 = new Arrete(s5, s7, 6);
-let a7 = new Arrete(s6, s7, 7);
-let a8 = new Arrete(s1, s4, 8);
-let a9 = new Arrete(s2, s5, 9);
-let a10 = new Arrete(s3, s6, 10);
-g.addArete(a1);
-g.addArete(a2);
-g.addArete(a3);
-g.addArete(a4);
-g.addArete(a5);
-g.addArete(a6);
-g.addArete(a7);
-g.addArete(a8);
-g.addArete(a9);
-g.addArete(a10);
-console.log("Graph : ");
-console.log(g.getSommets());
-console.log(g.getAretes());
-console.log("Nombre de sommets : " + g.getNbSommet());
-console.log("Nombre d'arretes : " + g.getNbArete());
-g.saveGraph();
 
-let g = new graph("./graph.gr");
-console.log("Graph : ");
-console.log(g.getSommets());
-console.log(g.getAretes());
 */
+
+export { graph };
