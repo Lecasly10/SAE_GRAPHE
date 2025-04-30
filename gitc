@@ -35,8 +35,8 @@ tag() {
     if git rev-parse "$rep" >/dev/null 2>&1; then
         echo "⚠️  Le tag '$rep' existe déjà. Abandon."
     else
-        git tag "$rep"
-        echo -e "✅ Tag '$rep' créé\n"
+        safe_tag=$(echo "$rep" | tr ' +' '_')
+        git tag "$safe_tag"
         git push origin "$rep"
     fi
 }
