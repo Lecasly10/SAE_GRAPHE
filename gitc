@@ -1,0 +1,43 @@
+#!/bin/bash
+
+attend() {
+    read -p "" 
+}
+
+push() {
+	pull
+    echo "Message du commit"
+    read rep
+    git config --global user.email "victorien.denoyelle@epitech.eu"
+    git add -A
+    git commit -m "$rep"
+    git push
+    echo -e "Push effectué\n"
+}
+
+pull() {
+    git pull
+    echo -e "Pull effectué\n"
+}
+
+clone() {
+    echo "Répertoire à cloner"
+    read rep
+    git clone "$rep"
+    echo -e "Clone effectué\n"
+}
+
+clear
+select choix in "push" "pull" "clone" "status" "quitter"
+do
+    case $REPLY in
+        1) push ;;
+        2) pull ;;
+        3) clone ;;
+        4) git status ;;
+        5) break ;;
+        *) echo "Mauvaise entrée" ;;
+    esac
+	attend
+	clear
+done
