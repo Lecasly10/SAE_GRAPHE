@@ -1,4 +1,5 @@
 import { readFileSync, createWriteStream } from "node:fs";
+
 class Sommet {
     private nom : string;
     private voisins : Sommet[];
@@ -66,8 +67,26 @@ class graph {
         this.nbSo = 0;
         this.nbAr = 0;
         this.nom = "";
-        /*if(file != "")
-            this.chargerGraph(file);*/
+        if (file != "")
+            this.loadGraph(file);
+    }
+
+    private loadGraph(file : string){
+        let contenu : Array<string> = readFileSync(file, "utf-8").split("\n");
+        let n = contenu[0].split(" ");
+        this.nbSo = parseInt(n[0]);
+        this.nbAr = parseInt(n[1]);
+        for (let i = 1; i <= this.nbAr; i++) {
+            let s = contenu[i].split(" ");
+            let s1 = new Sommet(s[0], []);
+            let s2 = new Sommet(s[1], []);
+            s1.addVoisin(s2);
+            s2.addVoisin(s1);
+            this.sommets.push(s1);
+            this.sommets.push(s2);
+            let a = new Arrete(s1, s2, parseInt(s[2]));
+            this.aretes.push(a);
+        }
     }
 
     public getNom(){
@@ -171,6 +190,7 @@ class graph {
     }
 }
 
+/*
 let g = new graph();
 let s1 = new Sommet("A", []);
 let s2 = new Sommet("B", []);
@@ -212,3 +232,9 @@ console.log(g.getAretes());
 console.log("Nombre de sommets : " + g.getNbSommet());
 console.log("Nombre d'arretes : " + g.getNbArete());
 g.saveGraph();
+
+let g = new graph("./graph.gr");
+console.log("Graph : ");
+console.log(g.getSommets());
+console.log(g.getAretes());
+*/
