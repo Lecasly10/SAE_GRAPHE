@@ -27,15 +27,30 @@ clone() {
     echo -e "Clone effectué\n"
 }
 
+tag() {
+    echo "Tag à créer :"
+    read rep
+
+    # Vérifie si le tag existe déjà
+    if git rev-parse "$rep" >/dev/null 2>&1; then
+        echo "⚠️  Le tag '$rep' existe déjà. Abandon."
+    else
+        git tag "$rep"
+        echo -e "✅ Tag '$rep' créé\n"
+        git push origin "$rep"
+    fi
+}
+
 clear
-select choix in "push" "pull" "clone" "status" "quitter"
+select choix in "push" "pull" "clone" "status" "tag" "quitter"
 do
     case $REPLY in
         1) push ;;
         2) pull ;;
         3) clone ;;
         4) git status ;;
-        5) break ;;
+        5) tag ;;
+        6) break ;;
         *) echo "Mauvaise entrée" ;;
     esac
 	attend
