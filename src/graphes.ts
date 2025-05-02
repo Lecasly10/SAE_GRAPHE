@@ -1,6 +1,6 @@
 import { readFileSync, createWriteStream } from "node:fs";
-import { Sommet } from "./sommet";
-import { Arrete } from "./arete";
+import { Sommet } from "./sommet.ts";
+import { Arrete } from "./arete.ts";
 
 class graph {
     private nom : string;

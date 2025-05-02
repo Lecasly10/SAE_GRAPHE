@@ -1,4 +1,4 @@
-import { Sommet } from "./sommet";
+import { Sommet } from "./sommet.ts";
 
 class Arrete {
     private s1 : Sommet;
