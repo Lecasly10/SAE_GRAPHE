@@ -45,7 +45,45 @@ console.log("Nombre d'arretes : " + g.getNbArete());
 g.saveGraph();
 */
 
-let g1 = new graph("./graph.gr");
+
+let g1 = new graph();
 console.log("Graph : ");
-console.log(g1.getSommets());
-console.log(g1.getAretes());
+let s1 = new Sommet("A", []);
+let s2 = new Sommet("B", []);
+let s3 = new Sommet("C", []);
+let s4 = new Sommet("D", []);
+let s5 = new Sommet("E", []);
+let s6 = new Sommet("F", []);
+let s7 = new Sommet("G", []);
+g1.addSommet(s1);
+g1.addSommet(s2);
+g1.addSommet(s3);
+g1.addSommet(s4);
+g1.addSommet(s5);
+g1.addSommet(s6);
+g1.addSommet(s7);
+let a1 = new Arrete(s1, s2, 1);
+let a2 = new Arrete(s1, s3, 2);
+let a3 = new Arrete(s2, s4, 3);
+let a4 = new Arrete(s3, s5, 4);
+let a5 = new Arrete(s4, s6, 5);
+let a6 = new Arrete(s5, s7, 6);
+let a7 = new Arrete(s6, s7, 7);
+let a8 = new Arrete(s1, s4, 8);
+let a9 = new Arrete(s2, s5, 9);
+let a10 = new Arrete(s3, s6, 10);
+g1.addArete(a1);
+g1.addArete(a2);
+g1.addArete(a3);
+g1.addArete(a4);
+g1.addArete(a5);
+g1.addArete(a6);
+g1.addArete(a7);
+g1.addArete(a8);
+g1.addArete(a9);
+g1.addArete(a10);
+console.log(g1.getNbSommet());
+
+g1.redimensionner(2);
+console.log("New Graph : ");
+console.log(g1.getNbSommet());

@@ -4,8 +4,8 @@ import { Arrete } from "./arete";
 
 
 class Bellman {
-
-
+    private nbSo : number;
+    private arcs;
     
     public bellmanCourtChemin(source: number): number[] 
     {

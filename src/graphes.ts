@@ -19,12 +19,12 @@ class graph {
             this.loadGraph(file);
     }
 
-    private loadGraph(file : string){
+    private loadGraph(file : string){ //ajoute plusieurs fois le meme sommet
         let contenu : Array<string> = readFileSync(file, "utf-8").split("\n");
         let n = contenu[0].split(" ");
         this.nbSo = parseInt(n[0]);
         this.nbAr = parseInt(n[1]);
-        for (let i = 1; i <= this.nbAr; i++) {
+        for (let i = 1; i <= this.nbAr; i++) { //verifie pas si le sommet s1 / s2 n'est pas déjà dans la liste
             let s = contenu[i].split(" ");
             let s1 = new Sommet(s[0], []);
             let s2 = new Sommet(s[1], []);
@@ -37,46 +37,46 @@ class graph {
         }
     }
 
-    public getNom(){
+    public getNom(){ //fct
         return this.nom;
     }
-    public getSommets(){
+    public getSommets(){ //fct
         return this.sommets;
     }
     public getAretes(){
         return this.aretes;
     }
-    public getNbSommet(){
+    public getNbSommet(){ //fct
         return this.nbSo;
     }
-    public getNbArete(){
+    public getNbArete(){ //fct
         return this.nbAr;
     }
-    public setNom(nom : string){
+    public setNom(nom : string){ //fct
         this.nom = nom;
     }
-    public setSommets(sommets : Sommet[]){
+    public setSommets(sommets : Sommet[]){ //fct
         this.sommets = sommets;
     }
-    public setAretes(aretes : Arrete[]){
+    public setAretes(aretes : Arrete[]){ //fct
         this.aretes = aretes;
     }
-    public setNbSommet(nbSo : number){
+    public setNbSommet(nbSo : number){ //fct
         this.nbSo = nbSo;
     }
-    public setNbArete(nbAr : number){
+    public setNbArete(nbAr : number){ //fct
         this.nbAr = nbAr;
     }
-    public addSommet(s : Sommet){
+    public addSommet(s : Sommet){ //fct
         this.sommets.push(s);
         this.nbSo++;
     }
-    private inLink(s : Sommet){
+    private inLink(s : Sommet){ //fct
         if (s.getVoisins().length > 0)
             return true;
         return false;
     }
-    public removeSommet(s : Sommet){
+    public removeSommet(s : Sommet){ //fct
         let index = this.sommets.indexOf(s);
         if(index > -1){
             this.sommets.splice(index, 1);
@@ -97,15 +97,14 @@ class graph {
                 }
             }
         }
-
     }
-    public addArete(a : Arrete){
+    public addArete(a : Arrete){ //fct
         a.getS1().addVoisin(a.getS2());
         a.getS2().addVoisin(a.getS1());
         this.aretes.push(a);
         this.nbAr++;
     }
-    public removeArete(a : Arrete){
+    public removeArete(a : Arrete){ //fct
         let index = this.aretes.indexOf(a);
         if(index > -1){
             this.aretes.splice(index, 1);
@@ -124,7 +123,7 @@ class graph {
         }
         return false;
     }
-    public saveGraph(file : string = "./graph.gr"){
+    public saveGraph(file : string = "./graph.gr"){ //fct
         let output = createWriteStream(file);
         let contenu = "";
         contenu += this.nbSo + " " + this.nbAr + "\n";
@@ -137,12 +136,7 @@ class graph {
         output.end();
     }
 
-
-    /*
-
-    */
-
-    public redimensionner(nbSommet : number)
+    public redimensionner(nbSommet : number) //fct 
     {
         let i : number;
         let s : Sommet;
@@ -150,9 +144,8 @@ class graph {
         {
             for (i = this.nbSo; i < nbSommet; i++)
             {
-                s = new Sommet(i, []);
+                s = new Sommet(i.toString(), []);
                 this.sommets.push(s);
-                this.nbSo++;
             }
         }
         else if (nbSommet < this.nbSo) 
@@ -164,7 +157,9 @@ class graph {
             }
         }
         this.nbSo = nbSommet;
-
+        for (let j = 0; j < this.sommets.length; j++)
+            console.log(this.sommets[j].getNom()+"\n");
     }
 }
+
 export { graph };
