@@ -136,10 +136,35 @@ class graph {
         }
         output.end();
     }
+
+
+    /*
+
+    */
+
+    public redimensionner(nbSommet : number)
+    {
+        let i : number;
+        let s : Sommet;
+        if (nbSommet > this.nbSo) 
+        {
+            for (i = this.nbSo; i < nbSommet; i++)
+            {
+                s = new Sommet(i, []);
+                this.sommets.push(s);
+                this.nbSo++;
+            }
+        }
+        else if (nbSommet < this.nbSo) 
+        {
+            for (i = this.nbSo; i > nbSommet; i--) 
+            {
+                s = this.sommets[i-1];
+                this.removeSommet(s);
+            }
+        }
+        this.nbSo = nbSommet;
+
+    }
 }
-
-/*
-
-*/
-
 export { graph };
