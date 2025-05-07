@@ -35,14 +35,43 @@ tag() {
     if git rev-parse "$rep" >/dev/null 2>&1; then
         echo "⚠️  Le tag '$rep' existe déjà. Abandon."
     else
-        safe_tag=$(echo "$rep" | tr ' +' '_')
-        git tag "$safe_tag"
+        git tag "$rep"
+        echo -e "✅ Tag '$rep' créé\n"
         git push origin "$rep"
     fi
 }
 
+branche() {
+    echo "Nom de la branche à créer :"
+    read rep
+    git checkout -b "$rep" #pour créer une nouvelle branche
+    echo -e "Branche '$rep' créée\n"
+}
+
+retourner() {
+    CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+    echo "Branche actuelle : $CURRENT_BRANCH"
+    echo "Retour sur la branche 'main'"
+    git checkout main || { echo "❌ Impossible de passer sur la branche 'main'"; return 1; }
+    echo "Fusion de $CURRENT_BRANCH dans main"
+    git merge $CURRENT_BRANCH #pour retourner sur main
+    echo -e "✅ Maintenant sur la branche principale\n"
+    echo "Branche actuelle : $(git rev-parse --abbrev-ref HEAD)"
+}
+
+supprBranche() {
+    echo "Nom de la branche à supprimer :"
+    read rep
+    git branch -d "$rep" #pour supprimer une branche
+    echo -e "Branche '$rep' supprimée\n"
+}
+
+voirBranche() {
+    echo "Branche actuelle : $(git rev-parse --abbrev-ref HEAD)"
+}
+
 clear
-select choix in "push" "pull" "clone" "status" "tag" "quitter"
+select choix in "push" "pull" "clone" "status" "tag" "créer une branche" "retourner sur main branch" "supprimer une branche" "voir branche actuelle" "quitter"
 do
     case $REPLY in
         1) push ;;
@@ -50,7 +79,11 @@ do
         3) clone ;;
         4) git status ;;
         5) tag ;;
-        6) break ;;
+        6) branche ;;
+        7) retourner ;;
+        8) supprBranche ;;
+        9) voirBranche ;;
+        10) break ;;
         *) echo "Mauvaise entrée" ;;
     esac
 	attend
