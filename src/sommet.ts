@@ -3,6 +3,7 @@ class Sommet {
     private voisins : Sommet[];
     private prec : Sommet[];
     private suiv : Sommet[];
+    private duree : number;
 
     constructor(n : string){
         this.nom = n;
@@ -11,6 +12,12 @@ class Sommet {
         this.suiv = [];
     }
 
+    public getDuree():number{
+        return this.duree;
+    }
+    public setDuree(d : number):void{
+        this.duree = d;
+    }
     public getNom():string{
         return this.nom;
     }

@@ -19,7 +19,7 @@ class Graph {
             this.loadGraph(file);
     }
 
-    private som_aldready_exist(s: string): number {
+    public som_aldready_exist(s: string): number {
         for (let i = 0; i < this.sommets.length; i++)
             if (this.sommets[i]?.getNom() === s)
                 return i;
