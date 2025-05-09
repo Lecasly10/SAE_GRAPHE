@@ -1,6 +1,40 @@
 import { readFileSync } from "node:fs";
 import { Sommet } from "./sommet.ts";
 import { Graph } from "./graphes.ts";
+import { Bellman } from "./bellman.ts";
+
+class MissionDrone
+{
+    HorraireDepartPlusTot : number;
+    HorraireDepartPlusTard : number;
+    DurééMinimale : number;
+    MargeLibre : number;
+    MargeTotal : number;
+    TrajetCritique : number;
+    CheminCritique : number;
+
+    constructor(HorraireDepartPlusTot : number, HorraireDepartPlusTard : number, DurééMinimale : number, MargeLibre : number, MargeTotal : number, TrajetCritique : number, CheminCritique : number)
+    {
+        this.HorraireDepartPlusTot = HorraireDepartPlusTot;
+        this.HorraireDepartPlusTard = HorraireDepartPlusTard;
+        this.DurééMinimale = DurééMinimale;
+        this.MargeLibre = MargeLibre;
+        this.MargeTotal = MargeTotal;
+        this.TrajetCritique = TrajetCritique;
+        this.CheminCritique = CheminCritique;
+    }
+
+    public max(n:number, m:number) : number
+    {
+        return n > m ? n : m;
+    }
+
+
+    public min(n:number, m:number) : number
+    {
+        return n < m ? n : m;
+    }
+}
 
 class MPM {
     private graph: Graph;
@@ -48,4 +82,16 @@ class MPM {
             }
         }
     }
+    private DureesMin(): number {
+        let s: Sommet;
+        let d: number = 0;
+        for (let i = 0; i < this.graph.getSommets().length; i++) {
+            s = this.graph.getSommets()[i];
+            if (s.getDuree() > d)
+                d = s.getDuree();
+        }
+        return d;
+    }
 }
+
+export { MPM };

@@ -181,6 +181,14 @@ class Graph {
         for (let j = 0; j < this.sommets.length; j++)
             console.log(this.sommets[j].getNom()+"\n");
     }
+    public afficherGraph() {
+        console.log("Le nombre de sommets est : " + this.nbSo);
+        console.log("Le nombre d'aretes est : " + this.nbAr);
+        for (let i = 0; i < this.sommets.length; i++) {
+            this.sommets[i].afficherSommet();
+            console.log("\n ");
+        }
+    }
 }
 
 export { Graph };

@@ -4,6 +4,9 @@ class Sommet {
     private prec : Sommet[];
     private suiv : Sommet[];
     private duree : number;
+    private tot : number;
+    private tard : number;
+    private estSommetCritique : boolean;
 
     constructor(n : string){
         this.nom = n;
@@ -12,6 +15,32 @@ class Sommet {
         this.suiv = [];
     }
 
+    public getTard():number{
+        return this.tard;
+    }
+    public setTard(t : number):void{
+        this.tard = t;
+        if (this.tard === this.tot)
+            this.estSommetCritique = true;
+        else
+            this.estSommetCritique = false;
+    }
+    public getEstSommetCritique():boolean{
+        return this.estSommetCritique;
+    }
+    public setEstSommetCritique(e : boolean):void{
+        this.estSommetCritique = e;
+    }
+    public getTot():number{
+        return this.tot;
+    }
+    public setTot(t : number):void{
+        this.tot = t;
+        if (this.tot === this.tard)
+            this.estSommetCritique = true;
+        else
+            this.estSommetCritique = false;
+    }
     public getDuree():number{
         return this.duree;
     }
@@ -36,6 +65,7 @@ class Sommet {
     public addPrec(s : Sommet):void{
         this.prec[this.prec.length] = s;
         this.addVoisin(s);
+        this.tot < s.getTot() + s.getDuree() ? this.setTot(s.tot + s.duree) : this.tot;
     }
     public getSuiv():Sommet[]{
         return this.suiv;
@@ -54,6 +84,23 @@ class Sommet {
         index = this.suiv.indexOf(v);
         if(index > -1)
             this.suiv.splice(index, 1);
+    }
+    public afficherSommet():void{
+        console.log("Sommet : " + this.nom);
+        console.log("Precedent : ");
+
+        for (let i = 0; i < this.prec.length; i++) {
+            if (this.prec[i] === undefined) 
+                console.log("Début de la liste");
+            else console.log(this.prec[i].getNom());
+        }
+        console.log("Suivant : ");
+
+        for (let i = 0; i < this.suiv.length; i++) {
+            if (this.suiv.length === 0)
+                console.log("Fin de la liste");
+            else console.log(this.suiv[i].getNom());
+        }
     }
 }
 export { Sommet };
