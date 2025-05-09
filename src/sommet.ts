@@ -48,26 +48,5 @@ class Sommet {
         if(index > -1)
             this.suiv.splice(index, 1);
     }
-    public afficherSommet():void{
-        console.log("Sommet : " + this.nom);
-        console.log("Precedent : ");
-        for (let i = 0; i < this.prec.length; i++) 
-        {
-            if (this.prec[i] === undefined) 
-            {
-                console.log("Début de la liste");
-            }
-            else console.log(this.prec[i].getNom());
-        }
-        console.log("Suivant : ");
-        for (let i = 0; i < this.suiv.length; i++) 
-        {
-            if (this.suiv.length === 0)
-            {
-                console.log("Fin de la liste");
-            }
-            else console.log(this.suiv[i].getNom());
-        }
-    }
 }
 export { Sommet };

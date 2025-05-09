@@ -1,4 +1,4 @@
-import { graph } from "./src/graphes.ts";
+import { Graph } from "./src/graphes.ts";
 import { Sommet } from "./src/sommet.ts";
 import { Arrete } from "./src/arete.ts";
 
@@ -89,4 +89,4 @@ g1.redimensionner(2);
 console.log("New Graph : ");
 console.log(g1.getNbSommet());
 */
-g1.afficherGraph()
+console.log(g1.getSommets());

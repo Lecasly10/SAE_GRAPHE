@@ -58,8 +58,6 @@ class Bellman {
     {
         return this.bellmanLongChemin(source);
     }
-
-    
 } 
 
 export { Bellman };
