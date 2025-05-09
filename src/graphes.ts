@@ -20,10 +20,9 @@ class graph {
     }
 
     private som_aldready_exist(s: string): number {
-        for (let i = 0; i < this.sommets.length; i++) {
+        for (let i = 0; i < this.sommets.length; i++)
             if (this.sommets[i]?.getNom() === s)
                 return i;
-        }
         return -1;
     }
     
@@ -33,8 +32,8 @@ class graph {
         this.nbSo = parseInt(n[0]);
         this.nbAr = parseInt(n[1]);
     
-        for (let i = 1; i < this.nbAr; i++) {
-            let s = contenu[i].split(" ");
+        for (let i = 1; i < parseInt(n[1]); i++) {
+            let s = contenu[i]?.split(" ");
             let index1 = this.som_aldready_exist(s[0]);
             let index2 = this.som_aldready_exist(s[1]);
     
