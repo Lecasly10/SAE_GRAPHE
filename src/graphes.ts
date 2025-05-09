@@ -120,8 +120,6 @@ class graph {
         }
     }
     public addArete(a : Arrete){ //fct
-        a.getS1().addVoisin(a.getS2());
-        a.getS2().addVoisin(a.getS1());
         a.getS1().addSuiv(a.getS2());
         a.getS2().addPrec(a.getS1());
         this.aretes.push(a);
