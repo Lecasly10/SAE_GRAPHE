@@ -89,4 +89,4 @@ g1.redimensionner(2);
 console.log("New Graph : ");
 console.log(g1.getNbSommet());
 */
-console.log(g1.getSommets());
+g1.afficherGraph()
