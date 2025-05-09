@@ -19,37 +19,61 @@ class graph {
             this.loadGraph(file);
     }
 
-    private loadGraph(file : string){ //ajoute plusieurs fois le meme sommet
-        let contenu : Array<string> = readFileSync(file, "utf-8").split("\n");
+    private som_aldready_exist(s: string): number {
+        for (let i = 0; i < this.sommets.length; i++) {
+            if (this.sommets[i]?.getNom() === s)
+                return i;
+        }
+        return -1;
+    }
+    
+    private loadGraph(file: string): void {
+        let contenu: Array<string> = readFileSync(file, "utf-8").split("\n");
         let n = contenu[0].split(" ");
         this.nbSo = parseInt(n[0]);
         this.nbAr = parseInt(n[1]);
-        for (let i = 1; i <= this.nbAr; i++) { //verifie pas si le sommet s1 / s2 n'est pas déjà dans la liste
+    
+        for (let i = 1; i <= this.nbAr; i++) {
             let s = contenu[i].split(" ");
-            let s1 = new Sommet(s[0], []);
-            let s2 = new Sommet(s[1], []);
+            let index1 = this.som_aldready_exist(s[0]);
+            let index2 = this.som_aldready_exist(s[1]);
+    
+            let s1: Sommet;
+            let s2: Sommet;
+    
+            if (index1 === -1) {
+                s1 = new Sommet(s[0], []);
+                this.sommets.push(s1);
+            } else
+                s1 = this.sommets[index1];
+    
+            if (index2 === -1) {
+                s2 = new Sommet(s[1], []);
+                this.sommets.push(s2);
+            } else
+                s2 = this.sommets[index2];
+    
             s1.addVoisin(s2);
             s2.addVoisin(s1);
-            this.sommets.push(s1);
-            this.sommets.push(s2);
+    
             let a = new Arrete(s1, s2, parseInt(s[2]));
             this.aretes.push(a);
         }
     }
 
-    public getNom(){ //fct
+    public getNom():string{ //fct
         return this.nom;
     }
-    public getSommets(){ //fct
+    public getSommets():Sommet[]{ //fct
         return this.sommets;
     }
-    public getAretes(){
+    public getAretes():Arrete[]{
         return this.aretes;
     }
-    public getNbSommet(){ //fct
+    public getNbSommet():number{ //fct
         return this.nbSo;
     }
-    public getNbArete(){ //fct
+    public getNbArete():number{ //fct
         return this.nbAr;
     }
     public setNom(nom : string){ //fct

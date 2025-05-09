@@ -2,7 +2,8 @@ import { graph } from "./src/graphes.ts";
 import { Sommet } from "./src/sommet.ts";
 import { Arrete } from "./src/arete.ts";
 
-/*let g = new graph();
+/*
+let g = new graph();
 let s1 = new Sommet("A", []);
 let s2 = new Sommet("B", []);
 let s3 = new Sommet("C", []);
@@ -46,8 +47,9 @@ g.saveGraph();
 */
 
 
-let g1 = new graph();
+let g1 = new graph("./graph.gr");
 console.log("Graph : ");
+/*
 let s1 = new Sommet("A", []);
 let s2 = new Sommet("B", []);
 let s3 = new Sommet("C", []);
@@ -82,8 +84,9 @@ g1.addArete(a7);
 g1.addArete(a8);
 g1.addArete(a9);
 g1.addArete(a10);
-console.log(g1.getNbSommet());
 
 g1.redimensionner(2);
 console.log("New Graph : ");
 console.log(g1.getNbSommet());
+*/
+console.log(g1.getSommets());
