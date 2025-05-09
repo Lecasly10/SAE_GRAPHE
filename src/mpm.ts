@@ -1,6 +1,5 @@
-import { readFileSync, createWriteStream } from "node:fs";
+import { readFileSync } from "node:fs";
 import { Sommet } from "./sommet.ts";
-import { Arrete } from "./arete.ts";
 import { Graph } from "./graphes.ts";
 
 class MPM {
