@@ -33,7 +33,6 @@ class Bellman {
     {
         const dist = new Array(this.nbSo).fill(-Infinity);
         dist[source] = 0;
-
         for (let i = 0; i < this.nbSo - 1; i++) 
         {
             for (let [u, voisins] of this.arcs) 
@@ -55,7 +54,10 @@ class Bellman {
         return this.bellmanCourtChemin(source);
     }
 
-
+    public bellmanAntiArborescence(source: number): number[]
+    {
+        return this.bellmanLongChemin(source);
+    }
 } 
 
 export { Bellman };
