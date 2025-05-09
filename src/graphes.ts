@@ -33,7 +33,7 @@ class graph {
         this.nbSo = parseInt(n[0]);
         this.nbAr = parseInt(n[1]);
     
-        for (let i = 1; i <= this.nbAr; i++) {
+        for (let i = 1; i < this.nbAr; i++) {
             let s = contenu[i].split(" ");
             let index1 = this.som_aldready_exist(s[0]);
             let index2 = this.som_aldready_exist(s[1]);
@@ -42,21 +42,19 @@ class graph {
             let s2: Sommet;
     
             if (index1 === -1) {
-                s1 = new Sommet(s[0], []);
+                s1 = new Sommet(s[0]);
                 this.sommets.push(s1);
             } else
                 s1 = this.sommets[index1];
     
             if (index2 === -1) {
-                s2 = new Sommet(s[1], []);
+                s2 = new Sommet(s[1]);
                 this.sommets.push(s2);
             } else
                 s2 = this.sommets[index2];
     
-            s1.addVoisin(s2);
-            s2.addVoisin(s1);
-    
             let a = new Arrete(s1, s2, parseInt(s[2]));
+            this.addArete(a);
             this.aretes.push(a);
         }
     }
@@ -125,6 +123,8 @@ class graph {
     public addArete(a : Arrete){ //fct
         a.getS1().addVoisin(a.getS2());
         a.getS2().addVoisin(a.getS1());
+        a.getS1().addSuiv(a.getS2());
+        a.getS2().addPrec(a.getS1());
         this.aretes.push(a);
         this.nbAr++;
     }
@@ -168,7 +168,7 @@ class graph {
         {
             for (i = this.nbSo; i < nbSommet; i++)
             {
-                s = new Sommet(i.toString(), []);
+                s = new Sommet(i.toString());
                 this.sommets.push(s);
             }
         }
