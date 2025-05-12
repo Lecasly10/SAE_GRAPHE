@@ -48,13 +48,13 @@ g.saveGraph();
 
 
 let g1 = new Graph();
-let s1 = new Sommet("A", []);
-let s2 = new Sommet("B", []);
-let s3 = new Sommet("C", []);
-let s4 = new Sommet("D", []);
-let s5 = new Sommet("E", []);
-let s6 = new Sommet("F", []);
-let s7 = new Sommet("G", []);
+let s1 = new Sommet("A");
+let s2 = new Sommet("B");
+let s3 = new Sommet("C");
+let s4 = new Sommet("D");
+let s5 = new Sommet("E");
+let s6 = new Sommet("F");
+let s7 = new Sommet("G");
 g1.addSommet(s1);
 g1.addSommet(s2);
 g1.addSommet(s3);
