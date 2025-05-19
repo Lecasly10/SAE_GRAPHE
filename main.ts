@@ -1,6 +1,7 @@
 import { Graph } from "./src/graphes.ts";
 import { Sommet } from "./src/sommet.ts";
 import { Arrete } from "./src/arete.ts";
+import { MPM } from "./src/mpm.ts";
 
 /*
 let g = new graph();
@@ -44,8 +45,6 @@ console.log(g.getAretes());
 console.log("Nombre de sommets : " + g.getNbSommet());
 console.log("Nombre d'arretes : " + g.getNbArete());
 g.saveGraph();
-*/
-
 
 let g1 = new Graph();
 let s1 = new Sommet("A");
@@ -85,3 +84,6 @@ g1.addArete(a10);
 
 //console.log(g1.getSommets());
 g1.afficherGraph();
+*/
+
+let mpm = new MPM("./missions_drones.mpm");

@@ -7,6 +7,8 @@ class Sommet {
     private tot : number;
     private tard : number;
     private estSommetCritique : boolean;
+    private margetot : number;
+    private margelib : number;
 
     constructor(n : string){
         this.nom = n;
@@ -15,6 +17,31 @@ class Sommet {
         this.suiv = [];
     }
 
+    private findSuivTot(): number {
+        let res : number = 0;
+        let list = this.suiv;
+        for (let i = 0; i < list.length; i++) {
+            if (i === 0)
+                res = list[i].tot;
+            else
+                if (list[i].tot < res)
+                    res = list[i].tot;
+        }
+        return res;
+    }
+    public setMargeLibre(): number {
+        let suivTot :number = this.findSuivTot();
+        return suivTot - this.tot - this.duree;
+    }
+    public setMargeTotale(): number {
+        return this.tard - this.tot;
+    }
+    public getMargeLibre():number{
+        return this.margelib;
+    }
+    public getMargeTotale():number{
+        return this.margetot;
+    }
     public getTard():number{
         return this.tard;
     }
@@ -40,12 +67,15 @@ class Sommet {
             this.estSommetCritique = true;
         else
             this.estSommetCritique = false;
+        this.setMargeTotale();
+        this.getMargeLibre();
     }
     public getDuree():number{
         return this.duree;
     }
     public setDuree(d : number):void{
         this.duree = d;
+        this.getMargeLibre();
     }
     public getNom():string{
         return this.nom;
@@ -72,7 +102,8 @@ class Sommet {
     }
     public addSuiv(s : Sommet):void{
         this.suiv[this.suiv.length] = s;
-        this.addVoisin(s)
+        this.addVoisin(s);
+        this.getMargeLibre();
     }
     public removeVoisin(v : Sommet):void{
         let index = this.voisins.indexOf(v);

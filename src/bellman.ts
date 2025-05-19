@@ -1,6 +1,6 @@
-import { graph } from "./graphes";
-import { Sommet } from "./sommet";
-import { Arrete } from "./arete";
+import { Graph } from "./graphes.ts";
+import { Sommet } from "./sommet.ts";
+import { Arrete } from "./arete.ts";
 
 
 class Bellman {

@@ -20,10 +20,15 @@ class MPM {
         let s: Sommet;
         for (let i = 0; i < this.graph.getSommets().length; i++) {
             s = this.graph.getSommets()[i];
-            if (s.getPrec().length === 0)
+            if (s.getPrec().length === 0) {
                 this.source = s;
-            if (s.getSuiv().length === 0)
+                console.log("source : ");
+                console.log(s);
+            }if (s.getSuiv().length === 0) {
                 this.puit = s;
+                console.log("puit : ");
+                console.log(s);            
+            }
         }
     }
     private loadMpm(file: string): void {
@@ -59,7 +64,26 @@ class MPM {
         }
         return d;
     }
+    public printInfoSommet(s:Sommet):void {
+        console.log(s.getNom());
+        //console.log("Sommet : " + s.getNom() + "  --  Duréé : " + s.getDuree().toString() + "  --  Plus tôt : " + s.getTot.toString() + "  --  Plus tard : " + s.getTard() + "\nMarges :\nLibre : " + s.getMargeLibre() + "  --  Totale" + s.getMargeTotale() + "\nEst critique : " + s.getEstSommetCritique());
+    }
+    public parcoursGraph():void {
+        console.log("Parcours du MPM\n\nLa source : " + this.source.getNom() + "\nDurée : " + this.source.getDuree() + "  --   Sommets suivants : ");
+        let res : string = "";
+        let list = this.source.getSuiv();
+        for (let i = 0; i < list.length; i++) {
+            res += list[i].getNom() + " ; ";
+        }
+        res += "\n\n";
+        console.log(res);
+
+    }
+    /*
+    public getMarges():void {
+
+    }*/
 }
 
-//horaires de début au plus tard  ---  marges libres et totales  ---  trajets critiques et chemin critique
+//horaires de début au plus tard  ---  trajets critiques et chemin critique
 export { MPM };
