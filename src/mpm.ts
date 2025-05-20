@@ -1,34 +1,36 @@
 import { readFileSync } from "node:fs";
 import { Sommet } from "./sommet.ts";
 import { Graph } from "./graphes.ts";
-import { Bellman } from "./bellman.ts";
 
 class MPM {
     private graph: Graph;
     private source: Sommet;
     private puit: Sommet;
 
-    constructor(file : string = ""){
+    constructor(file : string = "") {
         this.graph = new Graph();
         
         if (file != "")
             this.loadMpm(file);
         this.findSourceAndPuit();
+        console.log("puit : ");
+        console.log(this.puit.getNom());
+        console.log("source : ");
+        console.log(this.source.getNom());
+        console.log("duree minimum : ");
+        console.log(this.DureesMin().toString());
+        this.printInfoSommet(this.source);
     }
 
     private findSourceAndPuit(): void {
         let s: Sommet;
         for (let i = 0; i < this.graph.getSommets().length; i++) {
             s = this.graph.getSommets()[i];
-            if (s.getPrec().length === 0) {
+            if (s.getPrec().length === 0 && this.source === undefined) {
                 this.source = s;
-                console.log("source : ");
-                console.log(s);
-            }if (s.getSuiv().length === 0) {
+                s.setTot(0);
+            } if (s.getSuiv().length === 0 && this.puit === undefined)
                 this.puit = s;
-                console.log("puit : ");
-                console.log(s);            
-            }
         }
     }
     private loadMpm(file: string): void {
@@ -65,8 +67,7 @@ class MPM {
         return d;
     }
     public printInfoSommet(s:Sommet):void {
-        console.log(s.getNom());
-        //console.log("Sommet : " + s.getNom() + "  --  Duréé : " + s.getDuree().toString() + "  --  Plus tôt : " + s.getTot.toString() + "  --  Plus tard : " + s.getTard() + "\nMarges :\nLibre : " + s.getMargeLibre() + "  --  Totale" + s.getMargeTotale() + "\nEst critique : " + s.getEstSommetCritique());
+        console.log("Sommet : " + s.getNom() + "  --  Duréé : " + s.getDuree().toString() + "  --  Plus tôt : " + s.getTot() + "  --  Plus tard : " + s.getTard() + "\nMarges :\n\tLibre : " + s.getMargeLibre() + "  --  Totale : " + s.getMargeTotale() + "\nEst critique : " + s.getEstSommetCritique());
     }
     public parcoursGraph():void {
         console.log("Parcours du MPM\n\nLa source : " + this.source.getNom() + "\nDurée : " + this.source.getDuree() + "  --   Sommets suivants : ");
@@ -79,11 +80,21 @@ class MPM {
         console.log(res);
 
     }
+    public cheminCritique():void {
+        let liste = this.graph.getSommets;
+        let res = "Chemin critique : ";
+
+        for (let i = 0; i < liste.length; i++) {
+            if (liste[i].getEstSommetCritique)
+                res += liste[i].getNom + " -- ";
+        }
+        console.log(res);
+    }
     /*
     public getMarges():void {
 
     }*/
 }
 
-//horaires de début au plus tard  ---  trajets critiques et chemin critique
+//horaires de début au plus tard
 export { MPM };
