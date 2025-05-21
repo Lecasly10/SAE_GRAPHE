@@ -6,6 +6,7 @@ class MPM {
     private graph: Graph;
     private source: Sommet;
     private puit: Sommet;
+    private durreeMin: number;
 
     constructor(file : string = "") {
         this.graph = new Graph();
@@ -56,15 +57,8 @@ class MPM {
             }
         }
     }
-    public DureesMin(): number {
-        let s: Sommet;
-        let d: number = 0;
-        for (let i = 0; i < this.graph.getSommets().length; i++) {
-            s = this.graph.getSommets()[i];
-            if (s.getDuree() > d)
-                d = s.getDuree();
-        }
-        return d;
+    public DureesMin(): void {
+        this.durreeMin = this.puit.getDuree() + this.puit.getTot();
     }
     public printInfoSommet(s:Sommet):void {
         console.log("Sommet : " + s.getNom() + "  --  Duréé : " + s.getDuree().toString() + "  --  Plus tôt : " + s.getTot() + "  --  Plus tard : " + s.getTard() + "\nMarges :\n\tLibre : " + s.getMargeLibre() + "  --  Totale : " + s.getMargeTotale() + "\nEst critique : " + s.getEstSommetCritique());
@@ -89,6 +83,28 @@ class MPM {
                 res += liste[i].getNom + " -- ";
         }
         console.log(res);
+    }
+    private initTard(s :Sommet):void {
+        if (s === this.puit)
+            s.setTard(this.durreeMin - s.getDuree());
+        for (let i in s.getPrec()) {
+            let s2 : Sommet = s.getPrec()[i];
+            if (s.getTard() - s2.getDuree() < s2.getTard())
+                s2.setTard(s.getTard() - s2.getDuree());
+        }
+        for (let j in s.getPrec())
+            this.initTard(s.getPrec()[j]);
+    }
+    private initTot(s :Sommet):void {
+        if (s === this.source)
+            s.setTot(0);
+        for (let i in s.getSuiv()) {
+            let s2 : Sommet = s.getSuiv()[i];
+            if (s.getTot() + s.getDuree() > s2.getTot())
+                s2.setTot(s.getTot() + s.getDuree());
+        }
+        for (let j in s.getSuiv())
+            this.initTot(s.getSuiv()[j]);
     }
     /*
     public getMarges():void {
